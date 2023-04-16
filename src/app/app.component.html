@@ -1,15 +1,17 @@
 <div class="d-flex align-items-center">
-    <div class="d-flex align-items-center w-40">
-        <div>
-            <input  type="number" class="input" placeholder="Choose Number of Seats to Book" [(ngModel)]="numberOfSeatsToBook"/>
-            <p *ngIf="showError" class="text-danger">You can't book more than 7 tickets at once</p>
-            <p *ngIf="showSeatUnavailableError" class="text-danger">We have only {{totalSeatsAvailable}} seats available</p>
-        </div>
-        <button class="btn" (click)="allotSeats()">allot</button>
-    </div>
-    <div class="d-flex flex-wrap w-410">
-        <div *ngFor="let i of totalSeats" >
+    <div class="d-flex flex-wrap w-410 mr-50">
+        <div *ngFor="let i of totalSeats">
             <div class="p-12 border mr-12 mb-12 w-20 bg-white" [class.selected]="i.isSelected">{{i.seatNumber}}</div>
+        </div>
+    </div>
+    <div class="w-40 h-80">
+        <div class="d-flex align-items-center">
+            <input  type="number" class="input" placeholder="Choose Number of Seats to Book" [(ngModel)]="numberOfSeatsToBook"/>
+            <button class="btn" (click)="allotSeats()">Allot Seat(s)</button>
+        </div>
+        <div>
+            <p *ngIf="showError" class="text-danger">You can't book more than 7 tickets at once</p>
+            <p *ngIf="showSeatUnavailableError && !showError" class="text-danger">{{totalSeatsAvailable == 0 ? 'All Seats are booked' : 'We have only ' + totalSeatsAvailable + ' seats left'}}</p>
         </div>
     </div>
 </div>
